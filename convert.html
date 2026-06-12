@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>이미지 형식 변환 - HEIC를 JPG로, PNG·WebP 상호 변환 | 이미지툴</title>
+<meta name="description" content="아이폰 HEIC 사진을 JPG로, PNG·JPG·WebP를 서로 변환합니다. 설치와 회원가입 없이 브라우저에서 바로 처리되며 파일이 서버로 전송되지 않습니다.">
+<!-- TODO: 도메인 확정 후 canonical, og:url 추가 -->
+<meta property="og:title" content="이미지 형식 변환 - HEIC → JPG, PNG·WebP 변환">
+<meta property="og:description" content="HEIC, PNG, JPG, WebP를 원하는 형식으로 변환합니다. 서버 업로드 없이 브라우저에서 처리됩니다.">
+<meta property="og:type" content="website">
+<link rel="stylesheet" href="css/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "아이폰 사진(HEIC)이 PC에서 안 열려요. 어떻게 하나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "HEIC는 아이폰의 기본 사진 형식으로, 윈도우 PC나 일부 웹사이트에서 열리지 않는 경우가 많습니다. 이 도구에 HEIC 파일을 올리고 JPG를 선택하면 어디서나 열리는 JPG 파일로 변환됩니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "PNG와 JPG는 무엇이 다른가요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "PNG는 투명 배경을 지원하고 화질 손실이 없는 대신 용량이 큽니다. JPG는 투명을 지원하지 않지만 용량이 작아 사진 저장·제출에 적합합니다. 로고나 아이콘은 PNG, 일반 사진은 JPG가 일반적입니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "변환할 때 파일이 서버로 전송되나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "아니요. 변환은 전부 사용자의 브라우저 안에서 이루어지며 파일이 서버로 업로드되지 않습니다."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a class="logo" href="index.html">이미지<span>툴</span></a>
+    <nav class="main-nav">
+      <a href="compress.html">용량 줄이기</a>
+      <a href="resize.html">크기 조절</a>
+      <a href="convert.html" class="active">형식 변환</a>
+    </nav>
+  </div>
+</header>
+<main>
+<h1>이미지 형식 변환 (HEIC · JPG · PNG · WebP)</h1>
+<p class="lead">아이폰 HEIC 사진을 JPG로, PNG·JPG·WebP를 서로 변환합니다. 파일은 서버로 전송되지 않습니다.</p>
+
+<!-- 애드센스 승인 후 광고 슬롯: 본문 상단 -->
+
+<div class="card">
+  <div class="controls" style="margin-top:0">
+    <div class="control-group">
+      <label class="group-label">변환할 형식</label>
+      <div class="radio-row">
+        <label><input type="radio" name="format" value="image/jpeg" checked> JPG</label>
+        <label><input type="radio" name="format" value="image/png"> PNG</label>
+        <label><input type="radio" name="format" value="image/webp"> WebP</label>
+      </div>
+      <div class="hint">형식을 먼저 고른 뒤 파일을 올리면 자동으로 변환됩니다.</div>
+    </div>
+    <div class="control-group" id="qualityGroup">
+      <label class="group-label">품질 (JPG·WebP)</label>
+      <input type="range" id="quality" min="50" max="100" value="90" aria-label="저장 품질">
+      <div class="hint">품질: <span id="qualityVal">90</span>% · 형식만 바꿀 때는 90~100을 권장합니다.</div>
+    </div>
+  </div>
+
+  <div class="dropzone" id="dropzone" role="button" tabindex="0" aria-label="이미지 선택 또는 끌어다 놓기" style="margin-top:16px">
+    <strong>여기를 클릭하거나 이미지를 끌어다 놓으세요</strong>
+    <small>HEIC · JPG · PNG · WebP 지원, 여러 장 가능</small>
+  </div>
+  <input type="file" id="fileInput" accept="image/*,.heic,.heif" multiple hidden>
+
+  <div class="status" id="status">HEIC 파일은 처음 한 번 변환 모듈을 불러오느라 몇 초 걸릴 수 있습니다.</div>
+  <div class="error-msg" id="errorMsg" hidden></div>
+  <div id="results"></div>
+</div>
+
+<h2>사용 방법</h2>
+<ol class="steps">
+  <li>변환하고 싶은 형식(JPG·PNG·WebP)을 선택합니다.</li>
+  <li>이미지를 클릭해 선택하거나 끌어다 놓습니다. 여러 장도 가능합니다.</li>
+  <li>변환이 끝나면 <strong>다운로드</strong> 버튼을 누릅니다.</li>
+</ol>
+
+<h2>아이폰 HEIC 사진, 왜 안 열릴까?</h2>
+<p>아이폰은 저장 공간을 아끼기 위해 사진을 <strong>HEIC(HEIF)</strong>라는 형식으로 저장합니다. 화질 대비 용량이 작은 좋은 형식이지만, 윈도우 PC의 기본 사진 뷰어나 회사 전산 시스템, 관공서 업로드 페이지에서는 지원하지 않는 경우가 많습니다. 그래서 "아이폰에서 보낸 사진이 PC에서 안 열린다"는 문제가 자주 생깁니다.</p>
+<p>이 도구에 HEIC 파일을 올리고 JPG를 선택하면 어디서나 열리는 파일로 바뀝니다. 변환 모듈은 HEIC 파일을 올렸을 때만 한 번 불러오며, 변환 자체는 브라우저 안에서 처리됩니다.</p>
+
+<h2>형식별 특징 한눈에 보기</h2>
+<table class="spec">
+  <tr><th>형식</th><th>장점</th><th>추천 용도</th></tr>
+  <tr><td>JPG</td><td>용량 작음, 어디서나 열림</td><td>사진 제출·공유 전반</td></tr>
+  <tr><td>PNG</td><td>투명 배경, 무손실 화질</td><td>로고, 아이콘, 캡처 화면</td></tr>
+  <tr><td>WebP</td><td>같은 화질에서 용량 최소</td><td>웹사이트·블로그 게시용</td></tr>
+  <tr><td>HEIC</td><td>아이폰 기본, 고효율</td><td>호환성이 낮아 변환 권장</td></tr>
+</table>
+
+<h2>자주 묻는 질문</h2>
+<div class="faq-item">
+  <h3>PNG로 바꾸면 용량이 커지는데 정상인가요?</h3>
+  <p>네, 정상입니다. PNG는 화질 손실이 없는 형식이라 사진처럼 색이 복잡한 이미지에서는 JPG보다 용량이 훨씬 커집니다. 용량을 줄이려면 JPG나 WebP를 선택하거나 <a href="compress.html">사진 용량 줄이기</a>를 이용하세요.</p>
+</div>
+<div class="faq-item">
+  <h3>투명 배경 PNG를 JPG로 바꾸면 어떻게 되나요?</h3>
+  <p>JPG는 투명을 지원하지 않아 투명한 부분이 흰색 배경으로 채워집니다. 투명을 유지해야 한다면 PNG나 WebP를 선택하세요.</p>
+</div>
+<div class="faq-item">
+  <h3>변환 후 크기나 용량도 조절하고 싶어요.</h3>
+  <p>픽셀 크기는 <a href="resize.html">사진 크기 조절</a>, 파일 용량은 <a href="compress.html">사진 용량 줄이기</a> 도구를 이어서 사용하면 됩니다.</p>
+</div>
+
+<!-- 애드센스 승인 후 광고 슬롯: 본문 하단 -->
+</main>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <a href="about.html">사이트 소개</a>
+      <a href="privacy.html">개인정보처리방침</a>
+    </div>
+    <div>© 2026 이미지툴 · 모든 처리는 브라우저 안에서 이루어집니다.</div>
+  </div>
+</footer>
+<script src="js/tool.js"></script>
+<script>
+(function () {
+  var T = window.ImgTool;
+  var dropzone = document.getElementById("dropzone");
+  var fileInput = document.getElementById("fileInput");
+  var results = document.getElementById("results");
+  var statusEl = document.getElementById("status");
+  var errorEl = document.getElementById("errorMsg");
+  var qualityEl = document.getElementById("quality");
+  var qualityVal = document.getElementById("qualityVal");
+
+  qualityEl.addEventListener("input", function () { qualityVal.textContent = qualityEl.value; });
+  document.querySelectorAll("input[name=format]").forEach(function (r) {
+    r.addEventListener("change", function () {
+      var png = document.querySelector("input[name=format]:checked").value === "image/png";
+      document.getElementById("qualityGroup").style.opacity = png ? "0.4" : "1";
+    });
+  });
+
+  function processFile(file) {
+    var mime = document.querySelector("input[name=format]:checked").value;
+    return T.normalizeFile(file).then(function (normalized) {
+      return T.fileToImage(normalized);
+    }).then(function (loaded) {
+      var canvas = T.drawToCanvas(loaded.img, loaded.img.naturalWidth, loaded.img.naturalHeight, mime);
+      var quality = mime === "image/png" ? undefined : parseInt(qualityEl.value, 10) / 100;
+      return T.canvasToBlob(canvas, mime, quality).then(function (blob) {
+        URL.revokeObjectURL(loaded.url);
+        T.makeResultRow(results, blob, T.changeExt(file.name, mime), null,
+          (file.type || "원본") + " → " + mime.replace("image/", "").toUpperCase());
+      });
+    });
+  }
+
+  function onFiles(files) {
+    errorEl.hidden = true;
+    statusEl.textContent = files.length + "장 변환 중...";
+    var chain = Promise.resolve();
+    var failed = [];
+    files.forEach(function (file) {
+      chain = chain.then(function () {
+        return processFile(file).catch(function (err) {
+          failed.push(file.name + " (" + err.message + ")");
+        });
+      });
+    });
+    chain.then(function () {
+      statusEl.textContent = "완료! 아래에서 다운로드하세요.";
+      if (failed.length) {
+        errorEl.hidden = false;
+        errorEl.textContent = "처리하지 못한 파일: " + failed.join(", ");
+      }
+    });
+  }
+
+  T.setupDropzone(dropzone, fileInput, onFiles);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>사진 용량 줄이기 - 무료 이미지 압축 (서버 업로드 없음) | 이미지툴</title>
+<meta name="description" content="사진·이미지 용량을 100KB, 300KB, 500KB 등 원하는 크기로 줄여 보세요. 설치와 회원가입 없이 브라우저에서 바로 처리되고, 파일이 서버로 전송되지 않아 안전합니다.">
+<!-- TODO: 도메인 확정 후 canonical, og:url 추가 -->
+<meta property="og:title" content="사진 용량 줄이기 - 무료 이미지 압축">
+<meta property="og:description" content="원하는 용량(100KB·300KB·1MB)에 맞춰 사진을 압축합니다. 서버 업로드 없이 브라우저에서 처리되어 안전합니다.">
+<meta property="og:type" content="website">
+<link rel="stylesheet" href="css/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "사진을 압축하면 화질이 많이 나빠지나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "품질 70~85% 수준의 압축은 화면으로 볼 때 원본과 구분이 거의 어렵습니다. 목표 용량을 너무 작게(예: 고해상도 사진을 50KB 이하) 잡으면 화질 저하가 눈에 띌 수 있으니, 필요한 최소 수준으로만 줄이는 것을 권장합니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "올린 사진이 서버에 저장되나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "아니요. 모든 압축 처리는 사용자의 브라우저 안에서만 이루어지며, 사진이 서버로 전송되거나 저장되지 않습니다. 신분증, 증명사진 같은 민감한 이미지도 안심하고 사용할 수 있습니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "아이폰에서 찍은 HEIC 사진도 압축할 수 있나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "네. HEIC/HEIF 파일을 올리면 자동으로 변환한 뒤 압축합니다. JPG로 형식만 바꾸고 싶다면 이미지 형식 변환 도구를 이용해 주세요."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "여러 장을 한 번에 압축할 수 있나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "네. 파일을 여러 개 선택하거나 한꺼번에 끌어다 놓으면 각각 압축되어 개별 다운로드 버튼이 표시됩니다."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a class="logo" href="index.html">이미지<span>툴</span></a>
+    <nav class="main-nav">
+      <a href="compress.html" class="active">용량 줄이기</a>
+      <a href="resize.html">크기 조절</a>
+      <a href="convert.html">형식 변환</a>
+    </nav>
+  </div>
+</header>
+<main>
+<h1>사진 용량 줄이기 (이미지 압축)</h1>
+<p class="lead">원하는 용량에 맞춰 사진을 압축합니다. 파일은 서버로 전송되지 않고 내 브라우저 안에서만 처리됩니다.</p>
+
+<!-- 애드센스 승인 후 광고 슬롯: 본문 상단 -->
+
+<div class="card">
+  <div class="dropzone" id="dropzone" role="button" tabindex="0" aria-label="사진 선택 또는 끌어다 놓기">
+    <strong>여기를 클릭하거나 사진을 끌어다 놓으세요</strong>
+    <small>JPG · PNG · WebP · HEIC 지원, 여러 장 가능</small>
+  </div>
+  <input type="file" id="fileInput" accept="image/*,.heic,.heif" multiple hidden>
+
+  <div class="controls">
+    <div class="control-group">
+      <label class="group-label">압축 방식</label>
+      <div class="radio-row">
+        <label><input type="radio" name="mode" value="quality" checked> 품질로 조절</label>
+        <label><input type="radio" name="mode" value="target"> 목표 용량 맞추기</label>
+      </div>
+      <div id="qualityControl">
+        <input type="range" id="quality" min="10" max="95" value="75" aria-label="압축 품질">
+        <div class="hint">품질: <span id="qualityVal">75</span>% (높을수록 화질 좋음·용량 큼)</div>
+      </div>
+      <div id="targetControl" style="display:none">
+        <select id="targetSize" aria-label="목표 용량">
+          <option value="102400">100KB 이하</option>
+          <option value="307200" selected>300KB 이하</option>
+          <option value="512000">500KB 이하</option>
+          <option value="1048576">1MB 이하</option>
+          <option value="2097152">2MB 이하</option>
+        </select>
+        <div class="hint">제출처의 용량 제한에 맞춰 선택하세요.</div>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="group-label">저장 형식</label>
+      <div class="radio-row">
+        <label><input type="radio" name="format" value="image/jpeg" checked> JPG (호환성 좋음)</label>
+        <label><input type="radio" name="format" value="image/webp"> WebP (용량 더 작음)</label>
+      </div>
+      <div class="hint">관공서·기업 사이트 제출용은 JPG를 권장합니다.</div>
+    </div>
+  </div>
+
+  <div class="status" id="status">설정을 바꾼 뒤 사진을 올리면 자동으로 압축됩니다.</div>
+  <div class="error-msg" id="errorMsg" hidden></div>
+  <div id="results"></div>
+</div>
+
+<h2>사용 방법</h2>
+<ol class="steps">
+  <li>압축 방식을 고릅니다. 제출 사이트에 용량 제한이 있다면 <strong>목표 용량 맞추기</strong>를 선택하세요.</li>
+  <li>사진을 클릭해 선택하거나 끌어다 놓습니다. 여러 장을 한꺼번에 올려도 됩니다.</li>
+  <li>압축이 끝나면 줄어든 용량을 확인하고 <strong>다운로드</strong> 버튼을 누릅니다.</li>
+</ol>
+
+<h2>이런 상황에서 유용해요</h2>
+<p>입사지원서나 자기소개서에 증명사진을 첨부할 때, 공공기관 민원 사이트에 서류 사진을 올릴 때, 수강신청·자격증 접수 사이트에 사진을 등록할 때는 대부분 <strong>100KB~1MB 사이의 용량 제한</strong>이 있습니다. 요즘 스마트폰 카메라로 찍은 사진은 한 장에 3~10MB가 넘는 경우가 많아서 그대로는 업로드가 거부되기 쉽습니다. 이 도구의 <strong>목표 용량 맞추기</strong>를 사용하면 제한에 맞는 크기로 한 번에 줄일 수 있습니다.</p>
+<p>이메일 첨부 용량을 줄이거나, 블로그·카페에 올릴 사진을 가볍게 만들어 로딩 속도를 높이고 싶을 때도 활용할 수 있습니다.</p>
+
+<h2>내 사진은 안전한가요?</h2>
+<p>네. 일반적인 이미지 압축 사이트는 사진을 서버로 업로드한 뒤 처리하지만, 이 도구는 <strong>사진이 내 컴퓨터(브라우저)를 떠나지 않습니다.</strong> 압축 계산이 전부 브라우저 안에서 이루어지기 때문에 신분증 사본, 증명사진, 계약서 사진처럼 민감한 이미지도 안심하고 사용할 수 있습니다. 인터넷 연결이 끊겨도 압축은 동작합니다.</p>
+
+<h2>자주 묻는 질문</h2>
+<div class="faq-item">
+  <h3>압축하면 화질이 많이 나빠지나요?</h3>
+  <p>품질 70~85% 수준에서는 화면으로 볼 때 원본과 거의 구분되지 않습니다. 다만 고해상도 사진을 50KB 이하처럼 아주 작게 줄이면 화질 저하가 보일 수 있으니, 필요한 만큼만 줄이는 것이 좋습니다.</p>
+</div>
+<div class="faq-item">
+  <h3>JPG와 WebP 중 무엇을 골라야 하나요?</h3>
+  <p>제출용이라면 어디서나 열리는 JPG를 추천합니다. WebP는 같은 화질에서 용량이 더 작지만, 일부 오래된 시스템에서는 지원하지 않을 수 있습니다.</p>
+</div>
+<div class="faq-item">
+  <h3>아이폰 HEIC 사진도 되나요?</h3>
+  <p>네, HEIC 파일을 올리면 자동으로 변환 후 압축됩니다. 압축 없이 형식만 바꾸려면 <a href="convert.html">이미지 형식 변환</a> 도구를 이용하세요.</p>
+</div>
+<div class="faq-item">
+  <h3>사진 크기(가로·세로 픽셀)도 줄이고 싶어요.</h3>
+  <p>픽셀 크기 조절은 <a href="resize.html">사진 크기 조절</a> 도구에서 할 수 있습니다. 용량과 크기를 모두 줄여야 한다면 크기를 먼저 조절한 뒤 압축하는 것이 효과적입니다.</p>
+</div>
+
+<!-- 애드센스 승인 후 광고 슬롯: 본문 하단 -->
+</main>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <a href="about.html">사이트 소개</a>
+      <a href="privacy.html">개인정보처리방침</a>
+    </div>
+    <div>© 2026 이미지툴 · 모든 처리는 브라우저 안에서 이루어집니다.</div>
+  </div>
+</footer>
+<script src="js/tool.js"></script>
+<script>
+(function () {
+  var T = window.ImgTool;
+  var dropzone = document.getElementById("dropzone");
+  var fileInput = document.getElementById("fileInput");
+  var results = document.getElementById("results");
+  var statusEl = document.getElementById("status");
+  var errorEl = document.getElementById("errorMsg");
+  var qualityEl = document.getElementById("quality");
+  var qualityVal = document.getElementById("qualityVal");
+
+  qualityEl.addEventListener("input", function () { qualityVal.textContent = qualityEl.value; });
+  document.querySelectorAll("input[name=mode]").forEach(function (r) {
+    r.addEventListener("change", function () {
+      var target = document.querySelector("input[name=mode]:checked").value === "target";
+      document.getElementById("qualityControl").style.display = target ? "none" : "";
+      document.getElementById("targetControl").style.display = target ? "" : "none";
+    });
+  });
+
+  function processFile(file) {
+    var mime = document.querySelector("input[name=format]:checked").value;
+    var mode = document.querySelector("input[name=mode]:checked").value;
+    return T.normalizeFile(file).then(function (normalized) {
+      return T.fileToImage(normalized);
+    }).then(function (loaded) {
+      var work;
+      if (mode === "target") {
+        var targetBytes = parseInt(document.getElementById("targetSize").value, 10);
+        work = T.compressToTarget(loaded.img, mime, targetBytes);
+      } else {
+        var q = parseInt(qualityEl.value, 10) / 100;
+        var canvas = T.drawToCanvas(loaded.img, loaded.img.naturalWidth, loaded.img.naturalHeight, mime);
+        work = T.canvasToBlob(canvas, mime, q);
+      }
+      return work.then(function (blob) {
+        URL.revokeObjectURL(loaded.url);
+        T.makeResultRow(results, blob, T.changeExt(file.name, mime), file.size);
+      });
+    });
+  }
+
+  function onFiles(files) {
+    errorEl.hidden = true;
+    statusEl.textContent = files.length + "장 처리 중...";
+    var chain = Promise.resolve();
+    var failed = [];
+    files.forEach(function (file) {
+      chain = chain.then(function () {
+        return processFile(file).catch(function (err) {
+          failed.push(file.name + " (" + err.message + ")");
+        });
+      });
+    });
+    chain.then(function () {
+      statusEl.textContent = "완료! 아래에서 다운로드하세요.";
+      if (failed.length) {
+        errorEl.hidden = false;
+        errorEl.textContent = "처리하지 못한 파일: " + failed.join(", ");
+      }
+    });
+  }
+
+  T.setupDropzone(dropzone, fileInput, onFiles);
+})();
+</script>
+</body>
+</html>
