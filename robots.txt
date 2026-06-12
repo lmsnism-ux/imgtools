@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
 
-# TODO: 도메인 확정 후 아래 주소 교체
-Sitemap: https://example.com/sitemap.xml
+# 무료 주소 운영 중. 도메인 구매 시 아래 주소 교체
+Sitemap: https://imgtools-b59.pages.dev/sitemap.xml
