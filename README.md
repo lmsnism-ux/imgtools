@@ -22,8 +22,17 @@ sitemap.xml / robots.txt
 ## 로컬 실행
 
 ```
-python3 -m http.server 4173 -d .
+npx wrangler pages dev .
 ```
+
+내부 링크가 확장자 없는 주소(/compress 등, Cloudflare Pages pretty URL)라서
+`python3 -m http.server`로는 페이지 간 이동이 안 된다. 개별 페이지 직접 열기는 가능.
+
+## 운영 중인 주소
+
+- 프로덕션: https://imgtools-b59.pages.dev (Cloudflare Pages, 프로젝트명 imgtools)
+- 저장소: https://github.com/lmsnism-ux/imgtools
+- 배포 방법: `wrangler pages deploy . --project-name imgtools --branch main`
 
 ## 배포 절차 (Cloudflare Pages 기준, 무료)
 

@@ -2,8 +2,8 @@
 <!-- 무료 주소 운영 중. 도메인 구매 시 아래 주소 교체 -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://imgtools-b59.pages.dev/</loc><priority>1.0</priority></url>
-  <url><loc>https://imgtools-b59.pages.dev/compress.html</loc><priority>0.9</priority></url>
-  <url><loc>https://imgtools-b59.pages.dev/resize.html</loc><priority>0.9</priority></url>
-  <url><loc>https://imgtools-b59.pages.dev/convert.html</loc><priority>0.9</priority></url>
-  <url><loc>https://imgtools-b59.pages.dev/about.html</loc><priority>0.3</priority></url>
+  <url><loc>https://imgtools-b59.pages.dev/compress</loc><priority>0.9</priority></url>
+  <url><loc>https://imgtools-b59.pages.dev/resize</loc><priority>0.9</priority></url>
+  <url><loc>https://imgtools-b59.pages.dev/convert</loc><priority>0.9</priority></url>
+  <url><loc>https://imgtools-b59.pages.dev/about</loc><priority>0.3</priority></url>
 </urlset>
