@@ -10,10 +10,15 @@ index.html      메인 (도구 허브)
 compress.html   사진 용량 줄이기 — 핵심 키워드 페이지
 resize.html     사진 크기 조절
 convert.html    형식 변환 (HEIC→JPG 포함, heic2any CDN 지연 로딩)
-about.html      사이트 소개 (애드센스 심사용)
+crop.html       사진 자르기 (비율 크롭, 캔버스 드래그)
+rotate.html     사진 회전·반전
+favicon.html    파비콘 생성기 (ICO 컨테이너를 JS로 직접 생성)
+about.html      사이트 소개 (애드센스 심사용, 문의: msnism@kakao.com)
 privacy.html    개인정보처리방침 (애드센스 심사 필수)
-css/style.css   공통 스타일
+404.html        Cloudflare Pages가 자동으로 사용
+css/style.css   공통 스타일 (라이트/다크 모드, 접근성 포커스 스타일 포함)
 js/tool.js      공통 이미지 처리 엔진 (ImgTool 전역)
+favicon.svg     사이트 자체 파비콘
 sitemap.xml / robots.txt
 ```
 

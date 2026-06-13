@@ -10,6 +10,8 @@
 <meta property="og:title" content="사진 용량 줄이기 - 무료 이미지 압축">
 <meta property="og:description" content="원하는 용량(100KB·300KB·1MB)에 맞춰 사진을 압축합니다. 서버 업로드 없이 브라우저에서 처리되어 안전합니다.">
 <meta property="og:type" content="website">
+<meta name="theme-color" content="#2563eb">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="css/style.css">
 <script type="application/ld+json">
 {
@@ -53,6 +55,7 @@
 </script>
 </head>
 <body>
+<a class="skip-link" href="#main">본문 바로가기</a>
 <header class="site-header">
   <div class="header-inner">
     <a class="logo" href="/">이미지<span>툴</span></a>
@@ -60,10 +63,13 @@
       <a href="/compress" class="active">용량 줄이기</a>
       <a href="/resize">크기 조절</a>
       <a href="/convert">형식 변환</a>
+      <a href="/crop">자르기</a>
+      <a href="/rotate">회전·반전</a>
+      <a href="/favicon">파비콘</a>
     </nav>
   </div>
 </header>
-<main>
+<main id="main">
 <h1>사진 용량 줄이기 (이미지 압축)</h1>
 <p class="lead">원하는 용량에 맞춰 사진을 압축합니다. 파일은 서버로 전송되지 않고 내 브라우저 안에서만 처리됩니다.</p>
 
@@ -108,9 +114,9 @@
     </div>
   </div>
 
-  <div class="status" id="status">설정을 바꾼 뒤 사진을 올리면 자동으로 압축됩니다.</div>
+  <div class="status" id="status" role="status">설정을 바꾼 뒤 사진을 올리면 자동으로 압축됩니다.</div>
   <div class="error-msg" id="errorMsg" hidden></div>
-  <div id="results"></div>
+  <div id="results" aria-live="polite"></div>
 </div>
 
 <h2>사용 방법</h2>

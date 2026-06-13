@@ -10,6 +10,8 @@
 <meta property="og:title" content="이미지 형식 변환 - HEIC → JPG, PNG·WebP 변환">
 <meta property="og:description" content="HEIC, PNG, JPG, WebP를 원하는 형식으로 변환합니다. 서버 업로드 없이 브라우저에서 처리됩니다.">
 <meta property="og:type" content="website">
+<meta name="theme-color" content="#2563eb">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="css/style.css">
 <script type="application/ld+json">
 {
@@ -45,6 +47,7 @@
 </script>
 </head>
 <body>
+<a class="skip-link" href="#main">본문 바로가기</a>
 <header class="site-header">
   <div class="header-inner">
     <a class="logo" href="/">이미지<span>툴</span></a>
@@ -52,10 +55,13 @@
       <a href="/compress">용량 줄이기</a>
       <a href="/resize">크기 조절</a>
       <a href="/convert" class="active">형식 변환</a>
+      <a href="/crop">자르기</a>
+      <a href="/rotate">회전·반전</a>
+      <a href="/favicon">파비콘</a>
     </nav>
   </div>
 </header>
-<main>
+<main id="main">
 <h1>이미지 형식 변환 (HEIC · JPG · PNG · WebP)</h1>
 <p class="lead">아이폰 HEIC 사진을 JPG로, PNG·JPG·WebP를 서로 변환합니다. 파일은 서버로 전송되지 않습니다.</p>
 
@@ -85,9 +91,9 @@
   </div>
   <input type="file" id="fileInput" accept="image/*,.heic,.heif" multiple hidden>
 
-  <div class="status" id="status">HEIC 파일은 처음 한 번 변환 모듈을 불러오느라 몇 초 걸릴 수 있습니다.</div>
+  <div class="status" id="status" role="status">HEIC 파일은 처음 한 번 변환 모듈을 불러오느라 몇 초 걸릴 수 있습니다.</div>
   <div class="error-msg" id="errorMsg" hidden></div>
-  <div id="results"></div>
+  <div id="results" aria-live="polite"></div>
 </div>
 
 <h2>사용 방법</h2>

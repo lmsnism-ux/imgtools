@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>사진 회전·반전 - 90도 회전, 좌우·상하 뒤집기 | 이미지툴</title>
+<meta name="description" content="옆으로 누운 사진을 90도 단위로 회전하거나 좌우·상하로 반전합니다. 설치 없이 브라우저에서 바로 처리되며 파일이 서버로 전송되지 않습니다.">
+<link rel="canonical" href="https://imgtools-b59.pages.dev/rotate">
+<meta property="og:url" content="https://imgtools-b59.pages.dev/rotate">
+<meta property="og:title" content="사진 회전·반전 - 90도 회전, 뒤집기">
+<meta property="og:description" content="누운 사진 바로 세우기, 좌우·상하 반전. 서버 업로드 없이 브라우저에서 처리됩니다.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#2563eb">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "회전하면 화질이 나빠지나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "90도 단위 회전과 반전은 픽셀의 위치만 바꾸는 작업이라 화질 손실이 사실상 없습니다. JPG 저장 시 미세한 재압축이 한 번 일어나지만 화면으로는 구분되지 않습니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "스마트폰 사진이 PC에서 옆으로 누워 보여요. 왜 그런가요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "스마트폰은 사진을 찍은 방향을 파일 안에 메모(EXIF 방향 정보)로만 적어두는 경우가 있어, 이 메모를 읽지 못하는 프로그램에서는 사진이 누워 보입니다. 이 도구로 바로 세워 저장하면 픽셀 자체가 회전되어 어디서나 똑바로 보입니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "올린 사진이 서버에 저장되나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "아니요. 회전·반전은 전부 사용자의 브라우저 안에서 이루어지며 사진이 서버로 전송되지 않습니다."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">본문 바로가기</a>
+<header class="site-header">
+  <div class="header-inner">
+    <a class="logo" href="/">이미지<span>툴</span></a>
+    <nav class="main-nav">
+      <a href="/compress">용량 줄이기</a>
+      <a href="/resize">크기 조절</a>
+      <a href="/convert">형식 변환</a>
+      <a href="/crop">자르기</a>
+      <a href="/rotate" class="active">회전·반전</a>
+      <a href="/favicon">파비콘</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+<h1>사진 회전·반전</h1>
+<p class="lead">옆으로 누운 사진을 바로 세우고, 좌우·상하로 뒤집습니다. 파일은 서버로 전송되지 않습니다.</p>
+
+<!-- 애드센스 승인 후 광고 슬롯: 본문 상단 -->
+
+<div class="card">
+  <div class="dropzone" id="dropzone" role="button" tabindex="0" aria-label="사진 선택 또는 끌어다 놓기">
+    <strong>여기를 클릭하거나 사진을 끌어다 놓으세요</strong>
+    <small>JPG · PNG · WebP · HEIC 지원</small>
+  </div>
+  <input type="file" id="fileInput" accept="image/*,.heic,.heif" hidden>
+
+  <div class="controls" id="rotateControls" style="display:none">
+    <div class="control-group">
+      <label class="group-label">회전</label>
+      <div class="radio-row">
+        <button type="button" class="secondary" id="rotLeft">↺ 왼쪽 90°</button>
+        <button type="button" class="secondary" id="rotRight">↻ 오른쪽 90°</button>
+        <button type="button" class="secondary" id="rot180">180°</button>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="group-label">반전</label>
+      <div class="radio-row">
+        <button type="button" class="secondary" id="flipH">⇄ 좌우 반전</button>
+        <button type="button" class="secondary" id="flipV">⇅ 상하 반전</button>
+        <button type="button" class="secondary" id="resetBtn">처음으로</button>
+      </div>
+    </div>
+  </div>
+
+  <canvas id="previewCanvas" class="preview" style="display:none" aria-label="회전 결과 미리보기"></canvas>
+  <button class="primary" id="saveBtn" style="display:none">이 상태로 저장하기</button>
+  <div class="status" id="status" role="status">사진을 올리면 회전 버튼이 나타납니다.</div>
+  <div class="error-msg" id="errorMsg" hidden></div>
+  <div id="results" aria-live="polite"></div>
+</div>
+
+<h2>사용 방법</h2>
+<ol class="steps">
+  <li>사진을 클릭해 선택하거나 끌어다 놓습니다.</li>
+  <li>회전·반전 버튼을 눌러 미리보기를 원하는 방향으로 맞춥니다. 여러 번 눌러도 됩니다.</li>
+  <li><strong>이 상태로 저장하기</strong>를 누르고 결과를 다운로드합니다.</li>
+</ol>
+
+<h2>사진이 자꾸 누워서 보이는 이유</h2>
+<p>스마트폰은 사진을 찍을 때 기기를 어느 방향으로 들었는지를 파일 안에 <strong>방향 메모(EXIF)</strong>로만 적어 둡니다. 이 메모를 읽는 프로그램에서는 똑바로 보이지만, 읽지 못하는 오래된 프로그램·웹사이트에서는 사진이 옆으로 누워 보입니다. 이 도구로 사진을 바로 세워 저장하면 <strong>픽셀 자체가 회전된 새 파일</strong>이 만들어져서 어디서 열어도 똑바로 보입니다.</p>
+<p>좌우 반전은 셀카가 거울처럼 뒤집혀 찍혔을 때 글자나 로고를 바로잡는 데 유용합니다.</p>
+
+<h2>자주 묻는 질문</h2>
+<div class="faq-item">
+  <h3>회전하면 화질이 나빠지나요?</h3>
+  <p>90도 단위 회전·반전은 픽셀 위치만 바꾸므로 화질 손실이 사실상 없습니다.</p>
+</div>
+<div class="faq-item">
+  <h3>기울어진 사진을 미세하게(예: 3도) 돌릴 수도 있나요?</h3>
+  <p>현재는 90도 단위 회전만 지원합니다. 수평 미세 조정 기능은 준비 중입니다.</p>
+</div>
+<div class="faq-item">
+  <h3>올린 사진이 서버에 저장되나요?</h3>
+  <p>아니요. 모든 처리는 브라우저 안에서 이루어지며 사진이 외부로 전송되지 않습니다.</p>
+</div>
+
+<!-- 애드센스 승인 후 광고 슬롯: 본문 하단 -->
+</main>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <a href="/about">사이트 소개</a>
+      <a href="/privacy">개인정보처리방침</a>
+    </div>
+    <div>© 2026 이미지툴 · 모든 처리는 브라우저 안에서 이루어집니다.</div>
+  </div>
+</footer>
+<script src="js/tool.js"></script>
+<script>
+(function () {
+  var T = window.ImgTool;
+  var dropzone = document.getElementById("dropzone");
+  var fileInput = document.getElementById("fileInput");
+  var results = document.getElementById("results");
+  var statusEl = document.getElementById("status");
+  var errorEl = document.getElementById("errorMsg");
+  var preview = document.getElementById("previewCanvas");
+  var saveBtn = document.getElementById("saveBtn");
+
+  var current = null; /* { img, url, name, mime } */
+  var rot = 0;        /* 0 | 90 | 180 | 270 */
+  var fh = false, fv = false;
+
+  function outputMime(file) {
+    if (T.isHeic(file)) return "image/jpeg";
+    if (file.type === "image/png") return "image/png";
+    if (file.type === "image/webp") return "image/webp";
+    return "image/jpeg";
+  }
+
+  function renderTo(canvas, maxSide) {
+    var nw = current.img.naturalWidth, nh = current.img.naturalHeight;
+    var scale = maxSide ? Math.min(1, maxSide / Math.max(nw, nh)) : 1;
+    var w = Math.max(1, Math.round(nw * scale));
+    var h = Math.max(1, Math.round(nh * scale));
+    var rotated = rot % 180 !== 0;
+    canvas.width = rotated ? h : w;
+    canvas.height = rotated ? w : h;
+    var c = canvas.getContext("2d");
+    if (current.mime === "image/jpeg") {
+      c.fillStyle = "#ffffff";
+      c.fillRect(0, 0, canvas.width, canvas.height);
+    }
+    c.save();
+    c.translate(canvas.width / 2, canvas.height / 2);
+    c.rotate(rot * Math.PI / 180);
+    c.scale(fh ? -1 : 1, fv ? -1 : 1);
+    c.drawImage(current.img, -w / 2, -h / 2, w, h);
+    c.restore();
+  }
+
+  function refresh() {
+    renderTo(preview, 480);
+  }
+
+  var actions = {
+    rotLeft: function () { rot = (rot + 270) % 360; },
+    rotRight: function () { rot = (rot + 90) % 360; },
+    rot180: function () { rot = (rot + 180) % 360; },
+    flipH: function () { fh = !fh; },
+    flipV: function () { fv = !fv; },
+    resetBtn: function () { rot = 0; fh = false; fv = false; }
+  };
+  Object.keys(actions).forEach(function (id) {
+    document.getElementById(id).addEventListener("click", function () {
+      if (!current) return;
+      actions[id]();
+      refresh();
+    });
+  });
+
+  function onFiles(files) {
+    var file = files[0];
+    errorEl.hidden = true;
+    statusEl.textContent = "사진 불러오는 중...";
+    T.normalizeFile(file).then(function (normalized) {
+      return T.fileToImage(normalized);
+    }).then(function (loaded) {
+      if (current) URL.revokeObjectURL(current.url);
+      current = { img: loaded.img, url: loaded.url, name: file.name, mime: outputMime(file) };
+      rot = 0; fh = false; fv = false;
+      document.getElementById("rotateControls").style.display = "";
+      preview.style.display = "";
+      saveBtn.style.display = "";
+      refresh();
+      statusEl.textContent = "버튼으로 방향을 맞춘 뒤 저장하세요.";
+    }).catch(function (err) {
+      errorEl.hidden = false;
+      errorEl.textContent = err.message;
+      statusEl.textContent = "";
+    });
+  }
+
+  saveBtn.addEventListener("click", function () {
+    if (!current) return;
+    var out = document.createElement("canvas");
+    renderTo(out, null);
+    var quality = current.mime === "image/png" ? undefined : 0.92;
+    T.canvasToBlob(out, current.mime, quality).then(function (blob) {
+      var base = current.name.replace(/\.[^/.]+$/, "");
+      var suffix = [];
+      if (rot) suffix.push("rot" + rot);
+      if (fh) suffix.push("fliph");
+      if (fv) suffix.push("flipv");
+      var name = T.changeExt(base + "_" + (suffix.join("_") || "copy"), current.mime);
+      T.makeResultRow(results, blob, name, null, out.width + " × " + out.height + "px");
+      statusEl.textContent = "완료! 아래에서 다운로드하세요.";
+    }).catch(function (err) {
+      errorEl.hidden = false;
+      errorEl.textContent = err.message;
+    });
+  });
+
+  T.setupDropzone(dropzone, fileInput, onFiles);
+})();
+</script>
+</body>
+</html>

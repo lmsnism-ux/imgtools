@@ -10,9 +10,12 @@
 <meta property="og:title" content="사진 크기 조절 - 픽셀 단위 이미지 리사이즈">
 <meta property="og:description" content="가로·세로 픽셀을 직접 지정해 사진 크기를 바꿉니다. 서버 업로드 없이 브라우저에서 처리됩니다.">
 <meta property="og:type" content="website">
+<meta name="theme-color" content="#2563eb">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+<a class="skip-link" href="#main">본문 바로가기</a>
 <header class="site-header">
   <div class="header-inner">
     <a class="logo" href="/">이미지<span>툴</span></a>
@@ -20,10 +23,13 @@
       <a href="/compress">용량 줄이기</a>
       <a href="/resize" class="active">크기 조절</a>
       <a href="/convert">형식 변환</a>
+      <a href="/crop">자르기</a>
+      <a href="/rotate">회전·반전</a>
+      <a href="/favicon">파비콘</a>
     </nav>
   </div>
 </header>
-<main>
+<main id="main">
 <h1>사진 크기 조절 (픽셀 단위 리사이즈)</h1>
 <p class="lead">가로·세로 픽셀을 직접 지정해 사진 크기를 바꿉니다. 파일은 서버로 전송되지 않습니다.</p>
 
@@ -54,18 +60,18 @@
     <div class="control-group">
       <label class="group-label">빠른 축소</label>
       <div class="radio-row">
-        <button type="button" class="dl-btn" style="background:var(--accent)" data-pct="75">75%</button>
-        <button type="button" class="dl-btn" style="background:var(--accent)" data-pct="50">50%</button>
-        <button type="button" class="dl-btn" style="background:var(--accent)" data-pct="25">25%</button>
+        <button type="button" class="secondary" data-pct="75">75%</button>
+        <button type="button" class="secondary" data-pct="50">50%</button>
+        <button type="button" class="secondary" data-pct="25">25%</button>
       </div>
       <div class="hint">원본 대비 비율로 줄입니다. 저장 형식은 원본과 같게 유지됩니다(HEIC은 JPG로 저장).</div>
     </div>
   </div>
 
   <button class="primary" id="resizeBtn" style="display:none">이 크기로 변환하기</button>
-  <div class="status" id="status">사진을 올리면 크기 입력란이 나타납니다.</div>
+  <div class="status" id="status" role="status">사진을 올리면 크기 입력란이 나타납니다.</div>
   <div class="error-msg" id="errorMsg" hidden></div>
-  <div id="results"></div>
+  <div id="results" aria-live="polite"></div>
 </div>
 
 <h2>사용 방법</h2>

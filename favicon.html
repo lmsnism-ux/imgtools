@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>파비콘 만들기 - 이미지로 favicon.ico 생성 (16·32·48px) | 이미지툴</title>
+<meta name="description" content="로고나 이미지를 올리면 favicon.ico, 애플 터치 아이콘, PWA 아이콘(192·512px)을 한 번에 만들어 드립니다. 적용용 HTML 코드 포함. 서버 업로드 없이 브라우저에서 처리됩니다.">
+<link rel="canonical" href="https://imgtools-b59.pages.dev/favicon">
+<meta property="og:url" content="https://imgtools-b59.pages.dev/favicon">
+<meta property="og:title" content="파비콘 만들기 - favicon.ico 생성기">
+<meta property="og:description" content="이미지 한 장으로 favicon.ico와 모든 크기의 사이트 아이콘을 만듭니다. 서버 업로드 없음.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#2563eb">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "파비콘이 무엇인가요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "파비콘(favicon)은 브라우저 탭, 즐겨찾기, 검색 결과 옆에 표시되는 웹사이트의 작은 아이콘입니다. favicon.ico 파일을 사이트 최상위 경로에 올리고 HTML에 링크 태그를 추가하면 적용됩니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "어떤 이미지를 올리는 것이 좋나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "정사각형에 가깝고 단순한 로고나 심볼이 좋습니다. 16×16px까지 줄어들어도 알아볼 수 있어야 하므로, 글자가 많거나 복잡한 사진은 피하는 것이 좋습니다. 정사각형이 아닌 이미지는 가운데 기준으로 잘라서 만듭니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "ico 파일 외에 PNG 아이콘은 왜 필요한가요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "아이폰 홈 화면 추가에는 180px 애플 터치 아이콘이, 안드로이드·PWA에는 192px와 512px PNG가 사용됩니다. 함께 만들어 두면 모든 기기에서 아이콘이 선명하게 보입니다."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">본문 바로가기</a>
+<header class="site-header">
+  <div class="header-inner">
+    <a class="logo" href="/">이미지<span>툴</span></a>
+    <nav class="main-nav">
+      <a href="/compress">용량 줄이기</a>
+      <a href="/resize">크기 조절</a>
+      <a href="/convert">형식 변환</a>
+      <a href="/crop">자르기</a>
+      <a href="/rotate">회전·반전</a>
+      <a href="/favicon" class="active">파비콘</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+<h1>파비콘 만들기 (favicon.ico 생성기)</h1>
+<p class="lead">로고 이미지 한 장으로 favicon.ico와 모든 크기의 사이트 아이콘을 만듭니다. 파일은 서버로 전송되지 않습니다.</p>
+
+<!-- 애드센스 승인 후 광고 슬롯: 본문 상단 -->
+
+<div class="card">
+  <div class="dropzone" id="dropzone" role="button" tabindex="0" aria-label="로고 이미지 선택 또는 끌어다 놓기">
+    <strong>여기를 클릭하거나 로고 이미지를 끌어다 놓으세요</strong>
+    <small>PNG · JPG · WebP 지원 · 정사각형에 가까운 단순한 이미지 권장</small>
+  </div>
+  <input type="file" id="fileInput" accept="image/*" hidden>
+
+  <div class="status" id="status" role="status">이미지를 올리면 모든 크기의 아이콘이 자동으로 만들어집니다.</div>
+  <div class="error-msg" id="errorMsg" hidden></div>
+  <div id="results" aria-live="polite"></div>
+
+  <div id="snippetWrap" style="display:none">
+    <h3>적용용 HTML 코드</h3>
+    <p class="hint" style="font-size:13px;color:var(--muted);margin:4px 0">내려받은 파일들을 사이트 최상위 경로에 올린 뒤, 아래 코드를 &lt;head&gt; 안에 붙여 넣으세요.</p>
+    <textarea id="snippet" rows="4" readonly aria-label="파비콘 적용 HTML 코드"></textarea>
+    <button type="button" class="secondary" id="copyBtn" style="margin-top:8px">코드 복사</button>
+  </div>
+</div>
+
+<h2>사용 방법</h2>
+<ol class="steps">
+  <li>로고나 심볼 이미지를 올립니다. 정사각형이 아니면 가운데 기준으로 잘라서 만듭니다.</li>
+  <li>자동으로 생성된 <strong>favicon.ico</strong>(16·32·48px 포함)와 PNG 아이콘들을 내려받습니다.</li>
+  <li>파일을 웹사이트 최상위 경로에 올리고, 함께 제공되는 HTML 코드를 <strong>&lt;head&gt;</strong>에 붙여 넣습니다.</li>
+</ol>
+
+<h2>만들어지는 파일</h2>
+<table class="spec">
+  <tr><th>파일</th><th>용도</th></tr>
+  <tr><td>favicon.ico</td><td>브라우저 탭·즐겨찾기 (16·32·48px이 한 파일에 포함)</td></tr>
+  <tr><td>apple-touch-icon.png (180px)</td><td>아이폰·아이패드 홈 화면 추가</td></tr>
+  <tr><td>icon-192.png</td><td>안드로이드 홈 화면, PWA</td></tr>
+  <tr><td>icon-512.png</td><td>PWA 설치 화면, 고해상도 표시</td></tr>
+</table>
+
+<h2>좋은 파비콘을 만드는 요령</h2>
+<p>파비콘은 최소 16×16px까지 줄어들기 때문에 <strong>단순할수록 좋습니다.</strong> 회사 로고 전체보다는 심볼만, 여러 글자보다는 한 글자가 잘 보입니다. 배경이 투명한 PNG를 올리면 투명도가 유지되며, 어두운 테마 브라우저에서도 잘 보이는지 확인하고 싶다면 너무 어두운 색은 피하는 것이 좋습니다.</p>
+<p>로고가 정사각형이 아니라면 <a href="/crop">사진 자르기</a>에서 1:1 비율로 먼저 잘라 원하는 부분이 정확히 들어가게 한 뒤 올리는 것을 추천합니다.</p>
+
+<h2>자주 묻는 질문</h2>
+<div class="faq-item">
+  <h3>파비콘이 무엇인가요?</h3>
+  <p>브라우저 탭, 즐겨찾기, 검색 결과 옆에 표시되는 웹사이트의 작은 아이콘입니다.</p>
+</div>
+<div class="faq-item">
+  <h3>적용했는데 바로 안 보여요.</h3>
+  <p>브라우저가 이전 아이콘을 기억(캐시)하고 있어서 그렇습니다. 강력 새로고침(Ctrl+Shift+R)을 하거나 시간이 지나면 새 아이콘이 표시됩니다.</p>
+</div>
+<div class="faq-item">
+  <h3>올린 로고가 서버에 저장되나요?</h3>
+  <p>아니요. 아이콘 생성은 전부 브라우저 안에서 이루어지며 이미지가 외부로 전송되지 않습니다.</p>
+</div>
+
+<!-- 애드센스 승인 후 광고 슬롯: 본문 하단 -->
+</main>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <a href="/about">사이트 소개</a>
+      <a href="/privacy">개인정보처리방침</a>
+    </div>
+    <div>© 2026 이미지툴 · 모든 처리는 브라우저 안에서 이루어집니다.</div>
+  </div>
+</footer>
+<script src="js/tool.js"></script>
+<script>
+(function () {
+  var T = window.ImgTool;
+  var dropzone = document.getElementById("dropzone");
+  var fileInput = document.getElementById("fileInput");
+  var results = document.getElementById("results");
+  var statusEl = document.getElementById("status");
+  var errorEl = document.getElementById("errorMsg");
+
+  function squareCanvas(img, size) {
+    var c = document.createElement("canvas");
+    c.width = c.height = size;
+    var ctx = c.getContext("2d");
+    ctx.imageSmoothingQuality = "high";
+    var m = Math.min(img.naturalWidth, img.naturalHeight);
+    var sx = (img.naturalWidth - m) / 2;
+    var sy = (img.naturalHeight - m) / 2;
+    ctx.drawImage(img, sx, sy, m, m, 0, 0, size, size);
+    return c;
+  }
+
+  function pngBlob(img, size) {
+    return T.canvasToBlob(squareCanvas(img, size), "image/png");
+  }
+
+  /* PNG 항목들을 ICO 컨테이너로 묶는다 */
+  function buildIco(entries) {
+    return Promise.all(entries.map(function (e) { return e.blob.arrayBuffer(); }))
+      .then(function (buffers) {
+        var count = buffers.length;
+        var headerSize = 6 + 16 * count;
+        var total = headerSize;
+        buffers.forEach(function (b) { total += b.byteLength; });
+        var out = new ArrayBuffer(total);
+        var dv = new DataView(out);
+        dv.setUint16(0, 0, true);
+        dv.setUint16(2, 1, true);
+        dv.setUint16(4, count, true);
+        var offset = headerSize;
+        buffers.forEach(function (buf, i) {
+          var size = entries[i].size;
+          var o = 6 + 16 * i;
+          dv.setUint8(o, size >= 256 ? 0 : size);
+          dv.setUint8(o + 1, size >= 256 ? 0 : size);
+          dv.setUint8(o + 2, 0);
+          dv.setUint8(o + 3, 0);
+          dv.setUint16(o + 4, 1, true);
+          dv.setUint16(o + 6, 32, true);
+          dv.setUint32(o + 8, buf.byteLength, true);
+          dv.setUint32(o + 12, offset, true);
+          new Uint8Array(out, offset, buf.byteLength).set(new Uint8Array(buf));
+          offset += buf.byteLength;
+        });
+        return new Blob([out], { type: "image/x-icon" });
+      });
+  }
+
+  function onFiles(files) {
+    var file = files[0];
+    errorEl.hidden = true;
+    results.innerHTML = "";
+    statusEl.textContent = "아이콘 만드는 중...";
+    T.fileToImage(file).then(function (loaded) {
+      var img = loaded.img;
+      var icoSizes = [16, 32, 48];
+      return Promise.all(icoSizes.map(function (s) {
+        return pngBlob(img, s).then(function (b) { return { size: s, blob: b }; });
+      })).then(function (icoEntries) {
+        return buildIco(icoEntries);
+      }).then(function (icoBlob) {
+        T.makeResultRow(results, icoBlob, "favicon.ico", null, "16·32·48px 포함");
+        return pngBlob(img, 180);
+      }).then(function (b) {
+        T.makeResultRow(results, b, "apple-touch-icon.png", null, "180 × 180px");
+        return pngBlob(img, 192);
+      }).then(function (b) {
+        T.makeResultRow(results, b, "icon-192.png", null, "192 × 192px");
+        return pngBlob(img, 512);
+      }).then(function (b) {
+        T.makeResultRow(results, b, "icon-512.png", null, "512 × 512px");
+        URL.revokeObjectURL(loaded.url);
+        document.getElementById("snippet").value =
+          '<link rel="icon" href="/favicon.ico" sizes="48x48">\n' +
+          '<link rel="apple-touch-icon" href="/apple-touch-icon.png">\n' +
+          '<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">\n' +
+          '<link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png">';
+        document.getElementById("snippetWrap").style.display = "";
+        statusEl.textContent = "완료! 4개 파일을 모두 내려받아 사이트 최상위 경로에 올리세요.";
+      });
+    }).catch(function (err) {
+      errorEl.hidden = false;
+      errorEl.textContent = err.message;
+      statusEl.textContent = "";
+    });
+  }
+
+  document.getElementById("copyBtn").addEventListener("click", function () {
+    var ta = document.getElementById("snippet");
+    navigator.clipboard.writeText(ta.value).then(function () {
+      document.getElementById("copyBtn").textContent = "복사됨!";
+      setTimeout(function () {
+        document.getElementById("copyBtn").textContent = "코드 복사";
+      }, 1500);
+    }, function () {
+      ta.select();
+      document.execCommand("copy");
+    });
+  });
+
+  T.setupDropzone(dropzone, fileInput, onFiles);
+})();
+</script>
+</body>
+</html>
