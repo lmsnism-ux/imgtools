@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>이메일·카카오톡 사진 첨부 용량 제한 해결법 | 이미지툴</title>
+<meta name="description" content="이메일, 카카오톡, 네이버 메일 등에서 사진 첨부 용량 초과 오류가 날 때 간단히 해결하는 방법을 알아봅니다.">
+<link rel="canonical" href="https://imgtools-b59.pages.dev/guide/email-photo">
+<meta property="og:url" content="https://imgtools-b59.pages.dev/guide/email-photo">
+<meta property="og:title" content="이메일·카카오톡 사진 첨부 용량 제한 해결법">
+<meta property="og:description" content="이메일, 카카오톡, 네이버 메일 등에서 사진 첨부 용량 초과 오류가 날 때 간단히 해결하는 방법을 알아봅니다.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#2563eb">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/css/style.css">
+
+<style>
+.guide-content { max-width: 780px; }
+.guide-content h1 { margin-bottom: .5rem; }
+.guide-content .lead { font-size: 1.05rem; margin-bottom: 1.5rem; }
+.guide-content h2 { margin-top: 2rem; }
+.guide-content table { font-size: .92rem; }
+.guide-content pre { margin: 1rem 0; }
+.guide-content .steps li { margin: .6rem 0; }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">본문 바로가기</a>
+<header class="site-header">
+  <div class="header-inner">
+    <a class="logo" href="/">이미지<span>툴</span></a>
+    <nav class="main-nav">
+      <a href="/compress">용량 줄이기</a>
+      <a href="/resize">크기 조절</a>
+      <a href="/convert">형식 변환</a>
+      <a href="/crop">자르기</a>
+      <a href="/rotate">회전·반전</a>
+      <a href="/favicon">파비콘</a>
+    </nav>
+  </div>
+</header>
+<main id="main" class="guide-content">
+
+<h1>이메일·카카오톡 사진 첨부 용량 제한 해결법</h1>
+<p class="lead">이메일이나 메신저로 사진을 보내려는데 "파일 용량 초과" 오류가 뜨는 경험, 한 번쯤 있으셨을 겁니다. 서비스마다 첨부 제한이 다르고, 스마트폰 사진은 기본적으로 커서 자주 막힙니다. 빠르게 해결하는 방법을 알아봅니다.</p>
+
+<!-- 애드센스 승인 후 광고 슬롯 -->
+
+<h2>주요 서비스별 첨부 용량 제한</h2>
+<table>
+  <thead><tr><th>서비스</th><th>첨부 제한</th><th>참고</th></tr></thead>
+  <tbody>
+    <tr><td>네이버 메일</td><td>파일당 최대 30MB, 총 100MB</td><td>대용량 첨부는 네이버 클라우드 링크로 전송</td></tr>
+    <tr><td>다음 카카오 메일</td><td>파일당 최대 25MB, 총 100MB</td><td>초과 시 링크 방식 안내</td></tr>
+    <tr><td>지메일 (Gmail)</td><td>첨부 합계 25MB (수신 기준 50MB)</td><td>초과 시 구글 드라이브 링크로 자동 전환</td></tr>
+    <tr><td>카카오톡</td><td>파일 하나 300MB</td><td>사진은 화질 자동 압축 전송 / 원본 전송 선택 가능</td></tr>
+    <tr><td>문자(MMS)</td><td>약 600KB~1MB (이통사마다 다름)</td><td>자동 압축 전송되는 경우 많음</td></tr>
+  </tbody>
+</table>
+
+<h2>빠른 해결법 — 사진 용량 줄이기</h2>
+<p>가장 간단한 방법은 보내기 전에 사진 용량을 줄이는 것입니다. 서비스 제한에 맞게 줄이면 첨부 오류가 사라지고, 받는 사람도 더 빠르게 다운로드할 수 있습니다.</p>
+<ol class="steps">
+  <li><a href="/compress">사진 용량 줄이기</a> 도구를 엽니다.</li>
+  <li><strong>목표 용량 맞추기</strong>를 선택하고 해당 서비스 제한보다 여유 있게 설정합니다. (예: 제한이 25MB라면 10MB 이하로 잡으면 안전합니다.)</li>
+  <li>사진을 올리면 자동으로 압축됩니다. 다운로드 후 첨부하면 됩니다.</li>
+</ol>
+
+<h2>여러 장을 보내야 할 때</h2>
+<p>여러 장을 보낼 때는 각 장의 용량뿐 아니라 전체 합계도 제한에 걸릴 수 있습니다. 예를 들어 지메일은 합계 25MB가 제한이므로 10장을 보내면 장당 2.5MB 이하여야 합니다. 이미지툴에서 여러 장을 한꺼번에 올려 일괄 압축할 수 있습니다.</p>
+
+<h2>카카오톡 사진 — 원본 전송과 일반 전송의 차이</h2>
+<p>카카오톡에서 사진을 보낼 때 <strong>일반 전송</strong>을 선택하면 카카오가 자동으로 화질을 압축합니다. 받는 사람이 저장하면 용량이 줄어든 버전이 저장됩니다. <strong>원본 전송</strong>을 선택해야 압축 없이 원본 화질 그대로 전달됩니다. 업무 자료, 인쇄용 사진, 원본 품질이 중요한 경우에는 원본 전송을 사용하세요.</p>
+
+<h2>자주 묻는 질문</h2>
+<div class="faq-item">
+  <h3>용량을 줄이면 받는 사람이 화질 차이를 느끼나요?</h3>
+  <p>일반적으로 품질 75~85% 수준의 압축은 화면에서 차이를 느끼기 어렵습니다. 이메일로 사진을 주고받는 정도라면 충분한 화질입니다. 인쇄나 편집에 쓸 원본이 필요하다면 클라우드 링크(구글 드라이브, 네이버 클라우드 등)로 원본을 공유하세요.</p>
+</div>
+<div class="faq-item">
+  <h3>아이폰 HEIC 사진을 보내면 상대방이 못 여는 경우가 있어요.</h3>
+  <p>안드로이드 사용자나 윈도우 구형 PC에서는 HEIC를 열지 못할 수 있습니다. 보내기 전에 <a href="/convert">형식 변환</a>으로 JPG로 바꾸면 해결됩니다.</p>
+</div>
+
+<div class="card" style="margin-top:2rem;padding:1.25rem;">
+  <strong>👉 사진 용량 바로 줄이기</strong>
+  <p style="margin:.5rem 0 0"><a href="/compress">사진 용량 줄이기 도구 열기 →</a></p>
+</div>
+
+</main>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <a href="/">이미지툴 홈</a>
+      <a href="/about">사이트 소개</a>
+      <a href="/privacy">개인정보처리방침</a>
+    </div>
+    <div>© 2026 이미지툴 · 모든 처리는 브라우저 안에서 이루어집니다.</div>
+  </div>
+</footer>
+</body>
+</html>

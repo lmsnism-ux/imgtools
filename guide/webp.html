@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WebP란? 웹사이트 이미지 최적화 완전 가이드 | 이미지툴</title>
+<meta name="description" content="WebP 형식의 특징, JPG·PNG와의 차이, 언제 WebP를 써야 하는지, 변환 방법까지 설명합니다.">
+<link rel="canonical" href="https://imgtools-b59.pages.dev/guide/webp">
+<meta property="og:url" content="https://imgtools-b59.pages.dev/guide/webp">
+<meta property="og:title" content="WebP란? 웹사이트 이미지 최적화 완전 가이드">
+<meta property="og:description" content="WebP 형식의 특징, JPG·PNG와의 차이, 언제 WebP를 써야 하는지, 변환 방법까지 설명합니다.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#2563eb">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/css/style.css">
+
+<style>
+.guide-content { max-width: 780px; }
+.guide-content h1 { margin-bottom: .5rem; }
+.guide-content .lead { font-size: 1.05rem; margin-bottom: 1.5rem; }
+.guide-content h2 { margin-top: 2rem; }
+.guide-content table { font-size: .92rem; }
+.guide-content pre { margin: 1rem 0; }
+.guide-content .steps li { margin: .6rem 0; }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">본문 바로가기</a>
+<header class="site-header">
+  <div class="header-inner">
+    <a class="logo" href="/">이미지<span>툴</span></a>
+    <nav class="main-nav">
+      <a href="/compress">용량 줄이기</a>
+      <a href="/resize">크기 조절</a>
+      <a href="/convert">형식 변환</a>
+      <a href="/crop">자르기</a>
+      <a href="/rotate">회전·반전</a>
+      <a href="/favicon">파비콘</a>
+    </nav>
+  </div>
+</header>
+<main id="main" class="guide-content">
+
+<h1>WebP란? 웹사이트 이미지 최적화 완전 가이드</h1>
+<p class="lead">WebP는 구글이 개발한 최신 이미지 형식으로, 같은 화질에서 JPG보다 25~34% 용량이 작습니다. 웹사이트 속도 최적화에 관심이 있다면 반드시 알아야 할 형식입니다. WebP가 무엇인지, 언제 쓰면 좋은지 알아봅니다.</p>
+
+<!-- 애드센스 승인 후 광고 슬롯 -->
+
+<h2>WebP의 핵심 특징</h2>
+<ul>
+  <li><strong>작은 용량:</strong> 같은 화질 기준 JPG보다 25~34%, PNG보다 26% 용량이 작습니다.</li>
+  <li><strong>손실·무손실 모두 지원:</strong> JPG처럼 파일 크기를 줄이는 손실 압축과 PNG처럼 원본 그대로를 보존하는 무손실 압축을 모두 지원합니다.</li>
+  <li><strong>투명 배경 지원:</strong> PNG처럼 알파 채널(투명 배경)을 지원합니다.</li>
+  <li><strong>애니메이션 지원:</strong> GIF처럼 움직이는 이미지도 WebP 형식으로 만들 수 있습니다.</li>
+</ul>
+
+<h2>WebP가 유리한 상황</h2>
+<p><strong>웹사이트·블로그 이미지:</strong> 페이지 로딩 속도에 직접 영향을 줍니다. 이미지 용량이 줄면 Core Web Vitals 점수(구글 SEO 평가 기준)가 높아지고 방문자 이탈률이 낮아집니다.</p>
+<p><strong>온라인 쇼핑몰 상품 사진:</strong> 상품 이미지 수십 장이 페이지에 올라가는 쇼핑몰에서는 WebP 전환만으로 페이지 로딩이 눈에 띄게 빨라집니다.</p>
+<p><strong>모바일 데이터 환경:</strong> 이미지 용량이 작을수록 데이터 절약이 되어 모바일 사용자에게 유리합니다.</p>
+
+<h2>WebP의 단점 — 이럴 때는 JPG·PNG를 써야 합니다</h2>
+<table>
+  <thead><tr><th>상황</th><th>권장 형식</th><th>이유</th></tr></thead>
+  <tbody>
+    <tr><td>공공기관·기업 서류 제출</td><td>JPG</td><td>WebP를 지원하지 않는 시스템이 많음</td></tr>
+    <tr><td>구형 PC·소프트웨어에서 열기</td><td>JPG 또는 PNG</td><td>IE, 구형 포토샵 등 WebP 미지원</td></tr>
+    <tr><td>이메일 첨부 (수신자 환경 모름)</td><td>JPG</td><td>WebP를 못 여는 환경이 있을 수 있음</td></tr>
+    <tr><td>인쇄용 고품질 이미지</td><td>PNG 또는 원본</td><td>화질 손실 없는 형식이 더 적합</td></tr>
+  </tbody>
+</table>
+
+<h2>WebP로 변환하기</h2>
+<p>기존 JPG, PNG, HEIC 사진을 WebP로 변환하려면 <a href="/convert">이미지 형식 변환</a> 도구를 사용하세요. 저장 형식을 WebP로 선택하고 파일을 올리면 됩니다. 설치나 회원가입 없이 브라우저에서 바로 변환되며, 파일이 서버로 전송되지 않습니다.</p>
+
+<h2>WebP 브라우저 지원 현황</h2>
+<p>크롬, 사파리(iOS 14+, macOS 11+), 파이어폭스, 엣지 등 현재 주요 브라우저 대부분이 WebP를 지원합니다. 2024년 기준 전 세계 브라우저의 96% 이상이 지원하므로 웹사이트 이미지로는 안심하고 사용할 수 있습니다. 다만 IE와 일부 구형 환경은 미지원입니다.</p>
+
+<h2>자주 묻는 질문</h2>
+<div class="faq-item">
+  <h3>WebP가 JPG보다 항상 좋은 건가요?</h3>
+  <p>용량 측면에서는 대부분 유리하지만, 범용성에서 JPG가 앞섭니다. 웹 환경이라면 WebP가 유리하고, 다양한 기기·프로그램에서 열어야 한다면 JPG가 안전합니다.</p>
+</div>
+<div class="faq-item">
+  <h3>WebP를 JPG로 다시 변환할 수 있나요?</h3>
+  <p>네. <a href="/convert">이미지 형식 변환</a>에서 WebP 파일을 올리고 JPG나 PNG를 선택하면 됩니다. 단, 손실 압축 WebP를 JPG로 변환하면 이미 줄어든 화질이 복원되지 않습니다.</p>
+</div>
+<div class="faq-item">
+  <h3>워드프레스에서 이미지를 자동으로 WebP로 변환할 수 있나요?</h3>
+  <p>EWWW Image Optimizer, Imagify 같은 플러그인을 사용하면 업로드 시 자동으로 WebP로 변환해줍니다. 서버 없이 HTML 사이트를 운영한다면 이미지를 미리 WebP로 변환해서 올리는 방법이 더 간단합니다.</p>
+</div>
+
+<div class="card" style="margin-top:2rem;padding:1.25rem;">
+  <strong>👉 JPG·PNG를 WebP로 변환하기</strong>
+  <p style="margin:.5rem 0 0"><a href="/convert">이미지 형식 변환 도구 열기 →</a></p>
+</div>
+
+</main>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <a href="/">이미지툴 홈</a>
+      <a href="/about">사이트 소개</a>
+      <a href="/privacy">개인정보처리방침</a>
+    </div>
+    <div>© 2026 이미지툴 · 모든 처리는 브라우저 안에서 이루어집니다.</div>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>파비콘(favicon)이란? 사이트 아이콘 만드는 법 | 이미지툴</title>
+<meta name="description" content="파비콘이 무엇인지, 왜 필요한지, 이미지로 무료로 favicon.ico 파일을 만드는 방법을 설명합니다.">
+<link rel="canonical" href="https://imgtools-b59.pages.dev/guide/favicon">
+<meta property="og:url" content="https://imgtools-b59.pages.dev/guide/favicon">
+<meta property="og:title" content="파비콘(favicon)이란? 사이트 아이콘 만드는 법">
+<meta property="og:description" content="파비콘이 무엇인지, 왜 필요한지, 이미지로 무료로 favicon.ico 파일을 만드는 방법을 설명합니다.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#2563eb">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/css/style.css">
+
+<style>
+.guide-content { max-width: 780px; }
+.guide-content h1 { margin-bottom: .5rem; }
+.guide-content .lead { font-size: 1.05rem; margin-bottom: 1.5rem; }
+.guide-content h2 { margin-top: 2rem; }
+.guide-content table { font-size: .92rem; }
+.guide-content pre { margin: 1rem 0; }
+.guide-content .steps li { margin: .6rem 0; }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">본문 바로가기</a>
+<header class="site-header">
+  <div class="header-inner">
+    <a class="logo" href="/">이미지<span>툴</span></a>
+    <nav class="main-nav">
+      <a href="/compress">용량 줄이기</a>
+      <a href="/resize">크기 조절</a>
+      <a href="/convert">형식 변환</a>
+      <a href="/crop">자르기</a>
+      <a href="/rotate">회전·반전</a>
+      <a href="/favicon">파비콘</a>
+    </nav>
+  </div>
+</header>
+<main id="main" class="guide-content">
+
+<h1>파비콘(favicon)이란? 사이트 아이콘 만드는 법</h1>
+<p class="lead">브라우저 탭에서 사이트 이름 왼쪽에 보이는 작은 아이콘을 파비콘(favicon)이라고 합니다. 작은 이미지지만 사이트의 첫인상을 결정하는 중요한 요소입니다. 이미지 파일 하나로 파비콘을 무료로 만드는 방법을 알아봅니다.</p>
+
+<!-- 애드센스 승인 후 광고 슬롯 -->
+
+<h2>파비콘이 중요한 이유</h2>
+<p>파비콘은 단순한 장식이 아닙니다. 탭을 여러 개 열어두었을 때 파비콘이 없으면 어떤 탭이 어떤 사이트인지 구분하기 어렵습니다. 파비콘이 있는 사이트는 더 완성도 있고 전문적으로 보이며, 북마크에 추가했을 때도 아이콘이 함께 표시되어 찾기 쉽습니다.</p>
+<p>특히 구글 애드센스 심사에서도 파비콘이 있는 사이트는 "완성된 사이트"로 인식되어 긍정적인 영향을 줍니다.</p>
+
+<h2>파비콘 파일 형식</h2>
+<p>파비콘의 표준 형식은 <strong>favicon.ico</strong>입니다. ICO 파일은 16×16, 32×32, 48×48 픽셀처럼 여러 크기를 하나의 파일 안에 담을 수 있어 다양한 해상도에서 선명하게 보입니다. 최근에는 SVG나 PNG 형식으로도 파비콘을 설정할 수 있지만, 가장 넓은 호환성을 원한다면 ICO를 기본으로 두는 것이 좋습니다.</p>
+<p>iOS, 안드로이드 홈 화면에 웹사이트를 추가할 때는 <strong>apple-touch-icon</strong>(180×180px PNG)이 별도로 필요하고, PWA 앱으로 배포한다면 192px, 512px PNG도 필요합니다. 이미지툴의 파비콘 생성기는 이 파일들을 한 번에 모두 만들어 줍니다.</p>
+
+<h2>파비콘 만들기 — 단계별</h2>
+<ol class="steps">
+  <li><a href="/favicon">파비콘 생성기</a> 도구를 엽니다.</li>
+  <li>파비콘으로 쓸 이미지를 올립니다. 정사각형 이미지가 가장 잘 어울립니다. 로고, 아이콘, 이니셜을 담은 이미지를 권장합니다.</li>
+  <li>생성이 완료되면 <strong>favicon.ico</strong>와 apple-touch-icon.png, icon-192.png, icon-512.png를 다운로드합니다.</li>
+  <li>파일들을 웹사이트 루트 폴더에 올리고, HTML <code>&lt;head&gt;</code>에 아래 코드를 추가합니다.</li>
+</ol>
+
+<pre><code>&lt;link rel="icon" href="/favicon.ico" sizes="any"&gt;
+&lt;link rel="icon" href="/favicon.svg" type="image/svg+xml"&gt;
+&lt;link rel="apple-touch-icon" href="/apple-touch-icon.png"&gt;</code></pre>
+
+<h2>파비콘 이미지 선택 팁</h2>
+<ul>
+  <li>16×16 픽셀에서도 알아볼 수 있게 최대한 단순한 형태가 좋습니다.</li>
+  <li>복잡한 사진보다 단색 배경에 아이콘이나 이니셜이 있는 디자인이 선명합니다.</li>
+  <li>브랜드 색상을 사용하면 탭에서 사이트를 바로 알아볼 수 있습니다.</li>
+  <li>정사각형 이미지를 사용하면 잘리거나 찌그러지지 않습니다.</li>
+</ul>
+
+<h2>자주 묻는 질문</h2>
+<div class="faq-item">
+  <h3>파비콘을 바꿨는데 브라우저에 반영이 안 돼요.</h3>
+  <p>브라우저가 이전 파비콘을 캐시(임시 저장)하고 있기 때문입니다. Ctrl+Shift+R (또는 Cmd+Shift+R)로 강제 새로고침하거나, 개인정보 보호 모드(시크릿 창)에서 열어보세요.</p>
+</div>
+<div class="faq-item">
+  <h3>SVG 파비콘과 ICO 파비콘 중 어떤 게 낫나요?</h3>
+  <p>SVG는 해상도에 상관없이 선명하고 파일 크기도 작습니다. 다만 구형 브라우저(IE 등)에서는 지원하지 않습니다. 두 가지를 함께 선언해 두면 최신 브라우저는 SVG를, 구형 브라우저는 ICO를 사용합니다.</p>
+</div>
+<div class="faq-item">
+  <h3>파비콘 파일이 없으면 어떻게 되나요?</h3>
+  <p>브라우저가 파비콘을 찾지 못하면 기본 아이콘(지구본 모양 등)이 표시되고, 서버 로그에 404 오류가 쌓입니다. 완성된 웹사이트라면 파비콘을 꼭 설정해 두세요.</p>
+</div>
+
+<div class="card" style="margin-top:2rem;padding:1.25rem;">
+  <strong>👉 파비콘 바로 만들기</strong>
+  <p style="margin:.5rem 0 0"><a href="/favicon">파비콘 생성기 도구 열기 →</a></p>
+</div>
+
+</main>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <a href="/">이미지툴 홈</a>
+      <a href="/about">사이트 소개</a>
+      <a href="/privacy">개인정보처리방침</a>
+    </div>
+    <div>© 2026 이미지툴 · 모든 처리는 브라우저 안에서 이루어집니다.</div>
+  </div>
+</footer>
+</body>
+</html>
